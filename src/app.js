@@ -9,13 +9,22 @@ const session = require('koa-generic-session')
 const redisStore = require('koa-redis')
 
 const { REDIS_CONF } = require('./conf/db')
+const { isProd } = require('./utils/env')
 
+// 路由
 const index = require('./routes/index')
 const users = require('./routes/users')
+const errorViewRouter = require('./routes/view/error')
 
 // 在页面显示的错误信息
 // error handler
-onerror(app)
+let onerrorConf = {}
+if (isProd) {
+  onerrorConf = {
+    redirect: 'error'
+  }
+}
+onerror(app, onerrorConf)
 
 // middlewares
 app.use(bodyparser({
@@ -57,6 +66,7 @@ app.use(session({
 // routes
 app.use(index.routes(), index.allowedMethods())
 app.use(users.routes(), users.allowedMethods())
+app.use(errorViewRouter.routes(), errorViewRouter.allowedMethods()) // 404 路由注册到最下面
 
 // 打印错误信息
 // error-handling
