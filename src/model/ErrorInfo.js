@@ -54,5 +54,10 @@ module.exports = {
   changeInfoFailInfo: {
     errno: 10008,
     message: '修改基本信息失败'
+  },
+  // 创建微博失败
+  createBlogFailInfo: {
+    errno: 11001,
+    message: '创建微博失败，请重试'
   }
 }
