@@ -16,7 +16,7 @@ async function create({ userId, content, image }) {
   // service
   try {
     // 创建微博
-    const blog = createBlog({
+    const blog = await createBlog({
       userId,
       content: xss(content),
       image
