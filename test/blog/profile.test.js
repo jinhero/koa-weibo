@@ -1,6 +1,6 @@
 /**
  * @description 个人主页 test
- * @author 双越老师
+ * @author jinhero
  */
 
  const server = require('../server')
